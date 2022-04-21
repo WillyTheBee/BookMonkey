@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="bmApp">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>BookMonkey</title>
+</head>
+<body>
+    <header>
+        <h1>BookMonkey</h1>
+    </header>
+
+    <a href="#!books/123">books</a>
+
+    <div ng-view></div>
+
+
     <!-- Scripts -->
     <script src="lib/angular-1.8.2/angular.js"></script>
     <script src="lib/angular-1.8.2/angular-route.js"></script>
-</head>
-<body ng-init="name = 'BookMonkey'">
-    <h1>Hello {{name}}</h1>
-    <input type="text" ng-model="name">
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/book_details.js"></script>
 </body>
 </html>
