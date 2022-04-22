@@ -1,13 +1,14 @@
+<input type="text" placeholder="Suche..." ng-model="searchText">
 <!-- die klassen sind dafür da das man das besser testen kann -->
 <table class="bm-book-list">
     <tbody>
         <!-- aufpassen, dass man hinter orderBy den Doppelpunkt nicht vergisst-->
         <!-- cool ist, man könnte im ProductListCtrl z.B eine variable machen "orderedBy" und wenn man die
         sortierung von Preis auf name ändern will muss man nur den wert der Variable ändern,
-        als gegensatz dazu ist hier statisch nach "price" sortiert-->
-        <tr ng-repeat="product in products | orderBy: getProductOrder">
-            <td ng-bind="product.name"></td>
-            <td ng-bind="product.property"></td>
+        als gegensatz dazu ist hier statisch nach "price" sortiert
+        FILTER: die filterfunktionalität ist negierbar wenn wir ein ! der variable voran stellen-->
+        <tr ng-repeat="product in products | orderBy: getProductOrder | filter: searchText">
+            <td><a ng-href="#!/products/{{ product.id }}" ng-bind="product.name"></a></td>
             <td ng-bind="product.price"></td>
         </tr>
     </tbody>

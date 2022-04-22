@@ -5,7 +5,7 @@ const bmApp = angular.module('bmApp', ['ngRoute']);
 
 // der Route service wird per Dependencie injection an die Methode übergeben
 // der route-Service arbeitet mit der ng-view directive zusammen, das html template wird also in das div mit dem ngview attr. geladen
-bmApp.config(function ($routeProvider) {
+bmApp.config(function ($routeProvider, $locationProvider) {
     // wenn also die URL localhost:/#!/products/123 requestet wird, wird product_details.html zurück gegebn
     // und direkt ein Controller mit scope auf dieses template gebunden
     // angular js erstellt bei jedem Aufruf der Route einen neuen Scope für den Controller
@@ -16,5 +16,11 @@ bmApp.config(function ($routeProvider) {
     .when("/products", {
         templateUrl: "templates/product_list.html",
         controller : "ProductListCtrl"
+    })
+    .otherwise({
+        redirectTo: "/products"
     });
+
+    // html5Mode macht meine URL's kaputt idk...
+    //$locationProvider.html5Mode(true);
 });
