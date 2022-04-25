@@ -28,11 +28,10 @@ bmApp.factory("ProductDataService", function () {
     // Service Implementierung
     srv.getProductById = function (id) {
         for (var i = 0, n = srv._products.length; i < n; i++) {
-            if (id === srv._products[i].id) {
+            if (id === srv._products[i].id.toString()) {
                 return angular.copy(srv._products[i]);
             }
         }
-
         return null;
     }
 

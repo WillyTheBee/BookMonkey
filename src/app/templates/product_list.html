@@ -9,6 +9,7 @@
         FILTER: die filterfunktionalität ist negierbar wenn wir ein ! der variable voran stellen-->
         <tr ng-repeat="product in products | orderBy: getProductOrder | filter: searchText">
             <td><a ng-href="#!/products/{{ product.id }}" ng-bind="product.name"></a></td>
+            <td ng-bind="product.producttype"></td>
             <td ng-bind="product.price"></td>
         </tr>
     </tbody>
