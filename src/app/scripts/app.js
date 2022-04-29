@@ -17,6 +17,24 @@ bmApp.config(function ($routeProvider, $locationProvider) {
         templateUrl: "templates/product_list.html",
         controller : "ProductListCtrl"
     })
+    // administrativer bereich
+        .when("/admin/products", {
+            // wir können das Template der Listenansicht wiederverwenden
+            templateUrl: "templates/product_list.html",
+            controller : "AdminProductListCtrl"
+        })
+        .when("/admin/products/new", {
+            templateUrl: "templates/admin/product_form.html",
+            controller: "AdminNewProductCtrl"
+        })
+        .when("/admin/products/:id/edit", {
+            templateUrl: "templates/admin/product_form.html",
+            controller: "AdminEditProductCtrl"
+        })
+        .when("/admin/products/:id/delete", {
+            templateUrl: "templates/admin/product_delete.html",
+            controller: "AdminDeleteProductCtrl"
+        })
     .otherwise({
         redirectTo: "/products"
     });

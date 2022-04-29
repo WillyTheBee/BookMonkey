@@ -1,0 +1,62 @@
+<!-- isEditMode wird im AdmitEditProductCrtl gesetzt-->
+<h2>Administrationsbereich</h2>
+
+<div class="split left">
+    <div class="centered">
+        <h3 ng-hide="isEditMode">Ein neues Product anlegen</h3>
+        <h3 ng-show="isEditMode">Product editieren</h3>
+
+        <!-- mit novalidate schalten wir die native Validierung des Browsers ab, denn wir nutzen ja die Validierung von AngularJS -->
+        <form name="productForm" novalidate>
+
+            <input type="text" placeholder="Name..." ng-model="product.name" name="name" required>
+            <!-- dirty gibt an ob bereit mit diesem input feld interagiert wurde-->
+            <span ng-show="productForm.name.$dirty && productForm.name.$invalid">Bitte geben sie einen Produktnamen ein</span>
+            <br>
+
+            <input type="number" placeholder="ID..." ng-model="product.id" name="id" ng-disabled="isEditMode" required>
+            <span ng-show="productForm.id.$dirty && productForm.id.$invalid">Bitte geben sie eine ID ein</span>
+            <br>
+
+
+            <input type="radio" name="producttype" ng-model="product.producttype"
+                   id="electronic" value="ELECTRONICS" required>
+            <label for="electronic">Elektronik</label>
+            <input type="radio" name="producttype" ng-model="product.producttype"
+                   id="food" value="FOOD" required>
+            <label for="food">Nahrung</label>
+            <input type="radio" name="producttype" ng-model="product.producttype"
+                   id="household" value="HOUSEHOLD" required>
+            <label for="household">Haushalt</label>
+            <br>
+
+            <!-- Preis Input mit spezieller und allgemeiner Fehelermeldung -> kann erst wieder freigeschaltet werden
+                 wenn der Preis service im Backend steht, siehe auch product_details und product_list
+            <input type="number" placeholder="Price..." ng-model="product.price" name="price" min=2 max=5000 required>
+            <span ng-show="productForm.price.$dirty && productForm.price.$invalid">
+                <span ng-show="productForm.price.$error.min">
+                    Der Preis muss mindestens ein Euro betragen.
+                </span>
+                <span ng-hide="productForm.price.$error.min">
+                    Bitte geben Sie einen gültigen Preis ein.
+                </span>
+            </span>
+            <br>
+            -->
+
+
+            <button ng-click="cancelAction()">Abbrechen</button>
+            <button ng-click="submitAction()" ng-disabled="productForm.$invalid"> {{ submitBtnLabel }}</button>
+        </form>
+    </div>
+</div>
+
+<div class="split right">
+    <div class="centered">
+        <h3>Vorschau</h3>
+        <!-- ng-include kann ein template in ein anderes template importieren. erwartet dabei einen relativen pfad über eine
+        scopevariable oder aber einen staatischen pfad in '' -->
+        <div class="simple-border padded" ng-include="'templates/product_details.html'">
+        </div>
+    </div>
+</div>

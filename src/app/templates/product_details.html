@@ -1,13 +1,13 @@
 <h2 ng-bind="product.name" class="bm-book-title"></h2> <!-- ngbind direktive ist performanter als eine expresion -->
 <p>
 <ul>
-    <li ng-bind-template="ID: {{ product.id }}"
-        class="bm-book-isbn"></li>
+    <li ng-bind-template="ID: {{ product.id }}"></li>
     <li ng-bind-template="ProduktTyp: {{ product.producttype }}"
         class="bm-book-num-pages"></li>
-    <li ng-bind-template="Preis: {{ product.price }} Euronen">
+    <!-- <li ng-bind-template="Preis: {{ product.price }} Euronen">
     </li>
+    -->
 </ul>
 </p>
 <hr>
-<a ng-click="goToListView()" href="">Zurück</a>
+<a ng-hide="isPreview" ng-click="goToListView()" href="">Zurück</a>

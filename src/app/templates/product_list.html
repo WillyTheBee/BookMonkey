@@ -1,16 +1,30 @@
+<h2 ng-show="isAdmin">Administrationsbereich</h2>
 <input type="text" placeholder="Suche..." ng-model="searchText">
 <!-- die klassen sind dafür da das man das besser testen kann -->
 <table class="bm-book-list">
     <tbody>
-        <!-- aufpassen, dass man hinter orderBy den Doppelpunkt nicht vergisst-->
-        <!-- cool ist, man könnte im ProductListCtrl z.B eine variable machen "orderedBy" und wenn man die
-        sortierung von Preis auf name ändern will muss man nur den wert der Variable ändern,
-        als gegensatz dazu ist hier statisch nach "price" sortiert
-        FILTER: die filterfunktionalität ist negierbar wenn wir ein ! der variable voran stellen-->
-        <tr ng-repeat="product in products | orderBy: getProductOrder | filter: searchText">
-            <td><a ng-href="#!/products/{{ product.id }}" ng-bind="product.name"></a></td>
-            <td ng-bind="product.producttype"></td>
-            <td ng-bind="product.price"></td>
-        </tr>
+    <!-- aufpassen, dass man hinter orderBy den Doppelpunkt nicht vergisst-->
+    <!-- cool ist, man könnte im ProductListCtrl z.B eine variable machen "orderedBy" und wenn man die
+    sortierung von Preis auf name ändern will muss man nur den wert der Variable ändern,
+    als gegensatz dazu ist hier statisch nach "price" sortiert
+    FILTER: die filterfunktionalität ist negierbar wenn wir ein ! der variable voran stellen-->
+    <tr ng-repeat="product in products | orderBy: getProductOrder | filter: searchText">
+        <td ng-hide="isAdmin"><a ng-href="#!/products/{{ product.id }}" ng-bind="product.name"></a></td>
+        <!-- die titel spalte quasi anders, wenn man mit "isAdmin" registriert ist-->
+        <td ng-show="isAdmin"><a ng-href="#!/admin/products/{{ product.id }}/edit" ng-bind="product.name"></a></td>
+        <td ng-bind="product.producttype"></td>
+        <!-- <td ng-bind="product.price"></td> -->
+        <td ng-show="isAdmin"><a ng-href="#!/admin/products/{{ product.id }}/delete">Löschen</a></td>
+    </tr>
     </tbody>
 </table>
+
+<p ng-show="isAdmin">
+    <a ng-href="#!/admin/products/new">neues Product anlegen</a>
+    <br>
+    <a ng-href="#!/products">Zurück</a>
+</p>
+
+<p ng-hide="isAdmin">
+    <a ng-href="#!/admin/products">admin</a>
+</p>
