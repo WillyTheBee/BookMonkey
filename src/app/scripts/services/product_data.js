@@ -2,22 +2,22 @@ bmApp.factory("ProductDataService", function ($http) {
 
     var srv = {};
 
-    srv._baseUrl = "http://localhost:80/products";
+    srv._baseUrl = "http://localhost";
 
     // Service Implementierung
     srv.getProductById = function (id) {
         return $http.get(srv._baseUrl + "/get/" + id);
     };
 
-    srv.getProducts =  function () {
+    srv.getProducts =  function (type) {
         // zurückgeben einer Kopie um die interne Datenstruktur nicht von außen manipulierbar zu machen
         //return angular.copy(srv._products)
-        return $http.get(srv._baseUrl + "/get");
+        return $http.get(srv._baseUrl + "/get?type=" + type);
     };
 
     srv.storeProduct = function (product) {
         //srv._products.push(product);
-        return $http.post(srv._baseUrl + "/save", product);
+        return $http.put(srv._baseUrl + "/save", product);
     };
 
     // ueberscheibt ein Product, mit der Funktion angular.extend -> das erste argument wird mit dem 2. abgeglichen und ggf.
@@ -30,7 +30,7 @@ bmApp.factory("ProductDataService", function ($http) {
         //        return;
         //    }
         //}
-        return $http.put(srv._baseUrl + "/update" , product);
+        return $http.post(srv._baseUrl + "/update" , product);
     };
 
     // in der delete Funktion arbeitet man lieber mit einer while schleife weil der index des Arrays verändert wird wenn man
@@ -49,14 +49,17 @@ bmApp.factory("ProductDataService", function ($http) {
         return $http.delete(srv._baseUrl + "/delete/" + id);
     };
 
+    srv.getProductTypes = function () {
+        return $http.get(srv._baseUrl + "/types");
+    }
 
     // public API, also die methoden auf die von Außerhalb zugegriffen werden kann
     return {
         getProductById: function (id) {
             return srv.getProductById(id);
         },
-        getProducts: function () {
-            return srv.getProducts();
+        getProducts: function (type) {
+            return srv.getProducts(type);
         },
         storeProduct: function (product) {
             return srv.storeProduct(product);
@@ -65,7 +68,10 @@ bmApp.factory("ProductDataService", function ($http) {
             return srv.updateProduct(product);
         },
         deleteProductByID: function (id) {
-            return srv.deleteProductByID(id)
+            return srv.deleteProductByID(id);
+        },
+        getProductTypes: function () {
+            return srv.getProductTypes();
         }
     };
 })

@@ -7,7 +7,7 @@ bmApp.controller("AdminDeleteProductCtrl", function ($scope, $location, ProductD
             $scope.product = response.data;
         })
         .catch(function (error) {
-            console.log("ERROR: ", error);
+            console.error("ERROR admin_delete_product | getProductById: ", error);
         });
 
 
@@ -18,7 +18,7 @@ bmApp.controller("AdminDeleteProductCtrl", function ($scope, $location, ProductD
                 goToAdminListView();
             })
             .catch(function (error) {
-                console.log("ERROR: ", error);
+                console.error("ERROR admin_delete_product | deleteProductById: ", error);
             });
     };
 

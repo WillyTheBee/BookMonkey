@@ -6,20 +6,25 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles/main.css">
 </head>
-<body>
+<body ng-controller="mainCtrl">
     <header>
         <h1>ProductMonkey</h1>
     </header>
 
+    <ul>
+        <li ng-repeat="type in types"><a ng-bind="type" ng-href="#!/products/{{ type }}"></a></li>
+    </ul>
+
+    <!-- was mache ich mit der admin view, weil diese muss ich ja dann ggf auch dem ausgewähltem product type anpassen-->
+
     <div ng-view></div>
-
-
 
     <!-- Scripts -->
     <script src="lib/angular-1.8.2/angular.js"></script>
     <script src="lib/angular-1.8.2/angular-route.js"></script>
 
     <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/product_details.js"></script>
     <script src="scripts/controllers/product_list.js"></script>
     <script src="scripts/controllers/admin_product_list.js"></script>

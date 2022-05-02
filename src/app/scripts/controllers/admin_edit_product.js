@@ -10,11 +10,7 @@ bmApp.controller("AdminEditProductCtrl", function ($scope, $routeParams, $locati
             $scope.product = response.data;
         })
         .catch(function (error) {
-            console.log("ERROR: getProductById: "
-            + "id = " + id
-            + "statusCode = " +error.statusCode
-            + "message = " + error.message
-            );
+            console.error("ERROR admin_edit_product | getProductById: ", error);
         });
 
     $scope.submitAction = function () {
@@ -23,7 +19,7 @@ bmApp.controller("AdminEditProductCtrl", function ($scope, $routeParams, $locati
                 goToAdminListView();
             })
             .catch(function (error) {
-                console.log("ERROR: submitAction", error)
+                console.error("ERROR admin_edit_product | updateProduct: ", error);
             });
     };
 

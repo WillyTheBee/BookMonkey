@@ -7,8 +7,13 @@ bmApp.controller("AdminNewProductCtrl", function ($scope, $location, ProductData
     $scope.submitBtnLabel = "Produkt anlegen";
 
     $scope.submitAction = function () {
-        ProductDataService.storeProduct($scope.product);
-        goToAdminListView(); 
+        ProductDataService.storeProduct($scope.product)
+            .then(function () {
+                goToAdminListView();
+            })
+            .catch(function (error) {
+                console.error("ERROR admin_new_product | storeProduct: ", error);
+            });
     };
     
     $scope.cancelAction = function () {

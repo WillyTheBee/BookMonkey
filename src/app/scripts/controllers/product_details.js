@@ -5,7 +5,13 @@ bmApp.controller('ProductDetailsCtrl', function ($scope, $location, $routeParams
     var id = $routeParams.id;
 
     // holen des Product Objektes für die Detailansicht
-    $scope.product = ProductDataService.getProductById(id);
+    ProductDataService.getProductById(id)
+        .then(function (response) {
+            $scope.product = response.data;
+        })
+        .catch(function (error) {
+            console.error("ERROR product_details | getProductById: ", error);
+        });
 
     $scope.goToListView = function () {
         // location Service um mit der Adresszeile des Browsers zu interagieren

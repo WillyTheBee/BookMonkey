@@ -1,7 +1,15 @@
-bmApp.controller("ProductListCtrl", function ($scope, $filter, ProductDataService) {
+bmApp.controller("ProductListCtrl", function ($scope, $filter,$routeParams, ProductDataService) {
     console.log("Product List Ctrl meldet sich")
 
-    $scope.products = ProductDataService.getProducts();
+    var type = $routeParams.type;
+
+    ProductDataService.getProducts(type)
+        .then(function (response) {
+            $scope.products = response.data;
+        })
+        .catch(function (error) {
+            console.error("ERROR product_list | getProducts: ", error);
+        });
 
     $scope.getProductOrder = function (product) {
         return product.name;

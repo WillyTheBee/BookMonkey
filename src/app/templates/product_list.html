@@ -9,18 +9,18 @@
     als gegensatz dazu ist hier statisch nach "price" sortiert
     FILTER: die filterfunktionalität ist negierbar wenn wir ein ! der variable voran stellen-->
     <tr ng-repeat="product in products | orderBy: getProductOrder | filter: searchText">
-        <td ng-hide="isAdmin"><a ng-href="#!/products/{{ product.id }}" ng-bind="product.name"></a></td>
+        <td ng-hide="isAdmin"><a ng-href="#!/product/{{ product.id }}" ng-bind="product.name"></a></td>
         <!-- die titel spalte quasi anders, wenn man mit "isAdmin" registriert ist-->
-        <td ng-show="isAdmin"><a ng-href="#!/admin/products/{{ product.id }}/edit" ng-bind="product.name"></a></td>
-        <td ng-bind="product.producttype"></td>
+        <td ng-show="isAdmin"><a ng-href="#!/admin/product/{{ product.id }}/edit" ng-bind="product.name"></a></td>
+        <td ng-bind="product.productType"></td>
         <!-- <td ng-bind="product.price"></td> -->
-        <td ng-show="isAdmin"><a ng-href="#!/admin/products/{{ product.id }}/delete">Löschen</a></td>
+        <td ng-show="isAdmin"><a ng-href="#!/admin/product/{{ product.id }}/delete">Löschen</a></td>
     </tr>
     </tbody>
 </table>
 
 <p ng-show="isAdmin">
-    <a ng-href="#!/admin/products/new">neues Product anlegen</a>
+    <a ng-href="#!/admin/product/new">neues Product anlegen</a>
     <br>
     <a ng-href="#!/products">Zurück</a>
 </p>

@@ -9,34 +9,37 @@ bmApp.config(function ($routeProvider, $locationProvider) {
     // wenn also die URL localhost:/#!/products/123 requestet wird, wird product_details.html zurück gegebn
     // und direkt ein Controller mit scope auf dieses template gebunden
     // angular js erstellt bei jedem Aufruf der Route einen neuen Scope für den Controller
-    $routeProvider.when('/products/:id', {
+    $routeProvider.when('/product/:id', {
        templateUrl: 'templates/product_details.html',
        controller: 'ProductDetailsCtrl'
     })
-    .when("/products", {
-        templateUrl: "templates/product_list.html",
-        controller : "ProductListCtrl"
-    })
+        .when("/home", {
+            templateUrl: "templates/product_home.html"
+        })
+        .when("/products/:type", {
+            templateUrl: "templates/product_list.html",
+            controller : "ProductListCtrl"
+        })
     // administrativer bereich
-        .when("/admin/products", {
+        .when("/admin/products/:type", {
             // wir können das Template der Listenansicht wiederverwenden
             templateUrl: "templates/product_list.html",
             controller : "AdminProductListCtrl"
         })
-        .when("/admin/products/new", {
+        .when("/admin/product/new", {
             templateUrl: "templates/admin/product_form.html",
             controller: "AdminNewProductCtrl"
         })
-        .when("/admin/products/:id/edit", {
+        .when("/admin/product/:id/edit", {
             templateUrl: "templates/admin/product_form.html",
             controller: "AdminEditProductCtrl"
         })
-        .when("/admin/products/:id/delete", {
+        .when("/admin/product/:id/delete", {
             templateUrl: "templates/admin/product_delete.html",
             controller: "AdminDeleteProductCtrl"
         })
     .otherwise({
-        redirectTo: "/products"
+        redirectTo: "/home"
     });
 
     // html5Mode macht meine URL's kaputt idk...
